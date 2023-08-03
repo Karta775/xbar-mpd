@@ -1,5 +1,5 @@
 # xbar-mpd
-xbar-mpd is a simple xbar plugin for viewing the state of & controlling mpd. Since xbar works with limited space, the script will convert any long-artist names into an acronym ("King Gizzard and the Lizard Wizard" becomes "KGLW").
+xbar-mpd is a simple xbar plugin for viewing the state of & controlling mpd. Since xbar works with limited space, the script will convert any long artist names into an acronym, for example, "King Gizzard and the Lizard Wizard" becomes "KGLW".
 
 ### Requirements
 There are a few requirements:
