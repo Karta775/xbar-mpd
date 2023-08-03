@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 
 # User configuration
-TITLE_LIM=24        # Title length limit
-ARTIST_LIM=14       # Artist length limit
+LENGTH_LIM=30       # xbar output limit (if it's too long then xbar won't output anything)
+ARTIST_LIM=14       # Artist name limit
 SKIP_LOWERCASE=true # Skip lower case letters in artist acronym?
 
-# Vars
+# Variables
+title_lim=$((LENGTH_LIM - ARTIST_LIM))
 track="$(/opt/homebrew/bin/mpc -f '%artist% - %title%' current)"
 title="$(echo $track | sed 's/.*-\ //')"
 artist="$(echo $track | sed 's/\ -.*//')"
 
 # Acronymize the artist if it's too long
-if [ ${#artist} -gt $ARTIST_LIM ]; then
+if [ ${#artist} -gt $ARTIST_LIM ] || [ ${#title} -gt $title_lim ]; then
   arist_short=""
   for word in $artist; do
     initial="$(echo $word | cut -c1-1)"
@@ -20,11 +21,11 @@ if [ ${#artist} -gt $ARTIST_LIM ]; then
   done
 fi
 
-# If the track is currently playing
-if /opt/homebrew/bin/mpc status | tail -2 | grep -q "playing"; then
-  xbar_options=""
-else
-  xbar_options="| color=#555555" # Gray
+# Set text color to gray if the track is paused
+xbar_options=" | length=$LENGTH_LIM "
+if ! /opt/homebrew/bin/mpc status | tail -2 | grep -q "playing"; then
+  xbar_options+="color=#555555"
 fi
 
+# Final output
 echo -e "${artist_short:-$artist} - $title ${xbar_options}"
