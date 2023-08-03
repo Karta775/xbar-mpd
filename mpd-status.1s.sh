@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
 
+# User configuration
 TITLE_LIM=24        # Title length limit
 ARTIST_LIM=14       # Artist length limit
 SKIP_LOWERCASE=true # Skip lower case letters in artist acronym?
 
+# Vars
 track="$(/opt/homebrew/bin/mpc -f '%artist% - %title%' current)"
 title="$(echo $track | sed 's/.*-\ //')"
 artist="$(echo $track | sed 's/\ -.*//')"
 
-# Acronymize the artist if it's too long ('King Gizzard and the Lizard Wizard' -> 'KGLW')
+# Acronymize the artist if it's too long
 if [ ${#artist} -gt $ARTIST_LIM ]; then
   arist_short=""
   for word in $artist; do
@@ -22,7 +24,7 @@ fi
 if /opt/homebrew/bin/mpc status | tail -2 | grep -q "playing"; then
   xbar_options=""
 else
-  xbar_options="| color=#555555"
+  xbar_options="| color=#555555" # Gray
 fi
 
 echo -e "${artist_short:-$artist} - $title ${xbar_options}"
