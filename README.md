@@ -20,7 +20,7 @@ make install
 ```
 
 ### Configuration
-The shell script is quite simple and any configurable options are listed at the top of the `mpd-status.1s.sh` file along with comments explaining what each means. Make sure you re-run `make install` after performing any changes.
+The shell script is quite simple and any configurable options are listed at the top of the `mpd-status.1s.sh` file along with comments explaining what each means. Make sure you re-run the steps in [Installation](https://github.com/Karta775/xbar-mpd/tree/main#installation) after performing any changes.
 
 ### Recommendations
 I highly recommend using this in conjunction with the excellent [osxmpdkeys](https://github.com/pushrax/osxmpdkeys) which allows you to control mpd with the OSX media keys (play/pause, next, previous).
