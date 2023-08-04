@@ -16,7 +16,7 @@ if [ ${#artist} -gt $ARTIST_LIM ] || [ ${#title} -gt $title_lim ]; then
   arist_short=""
   for word in $artist; do
     initial="$(echo $word | cut -c1-1)"
-    [ ! $SKIP_LOWERCASE ] && [[ "$initial" =~ [a-z] ]] && continue
+    $SKIP_LOWERCASE && [[ "$initial" =~ [a-z] ]] && continue
     artist_short+="$initial"
   done
 fi
